@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Postcarder</title>
+    <title>Find Your Postcard</title>
+    <link rel="stylesheet" href="Postcard.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
@@ -12,34 +13,31 @@
   </head>
 <body>
 
-<div style="font-family:verdana;padding:20px;border-radius:10px;border:10px solid #000000;">
 
 <h1 style="font-size:80px" align="center"> Postcarder </h1>
 
-<div style="letter-spacing:12px;font-size:30px;" align = "center"> Create Your Own Postcard </div>
+<div style="letter-spacing:12px;font-size:30px;" align = "center"> Find Your Postcard</div>
 
 <br> </br>
+<br> </br>
 
-<div class="col-lg-6 col-md-6 col-sm-6" id="first">
-<!--find the podcard-->
-  <form action='findpage.html'>
-   <center><label>Find<input type="textbox" size="25"></label>
-   <input type="submit" value="Find My Postcard">
-  </form>
+<center><div class="col-lg-12 col-md-12 col-sm-12" id="first">
+  <div class="flip-box">
+    <div class="flip-box-inner">
+      <div class="flip-box-front">
+        <center><img src="pictureDemo.jpg" alt="PostcardDemo" style="width:600px;height:400px">
+      </div>
+      <div class="flip-box-back">
+        <h2>Your postcard</h2>
+        <p>What an amazing city</p>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="col-lg-6 col-md-6 col-sm-6" id="second">
-  <!--upload the picture-->
-  <form action="createpage.html" >
-    <center><input type="submit" value="Create your own postcard">
-  </form>
-</div>
+
 
 <br> </br>
-<br> </br>
-
-<center><img src="Cover.jpg" alt="Postcard" width="700" height="500">
-
 <!-- jQuery (Bootstrap JS plugins depend on it) -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
