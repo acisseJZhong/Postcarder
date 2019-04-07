@@ -29,14 +29,6 @@
 
 <div class="col-lg-6 col-md-6 col-sm-6" id="second">
   <!--upload the picture-->
-
-
-  <div id="filesubmit">
-    <input type="file" class="file-select" accept="image/*"/>
-    <button class="file-submit">SUBMIT</button>
-  </div>
-
-
   <form action="createpage.html" >
     <center><input type="submit" value="Create your own postcard">
   </form>
@@ -47,45 +39,6 @@
 
 <center><img src="Cover.jpg" alt="Postcard" width="700" height="500">
 
-
-  <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyAgEI3fNju27RQEnNNbMaVcalcLJqHHwPc",
-      authDomain: "postcarder-b6912.firebaseapp.com",
-      databaseURL: "https://postcarder-b6912.firebaseio.com",
-      projectId: "postcarder-b6912",
-      storageBucket: "postcarder-b6912.appspot.com",
-      messagingSenderId: "535648636013"
-    };
-    firebase.initializeApp(config);
-
-    const storageService = firebase.storage();
-    const storageRef = storageService.ref();
-
-    document.querySelector('.file-select').addEventListener('change', handleFileUploadChange);
-    document.querySelector('.file-submit').addEventListener('click', handleFileUploadSubmit);
-
-    let selectedFile;
-    function handleFileUploadChange(e) {
-      selectedFile = e.target.files[0];
-    }
-
-    function handleFileUploadSubmit(e) {
-      const uploadTask = storageRef.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
-      uploadTask.on('state_changed', function(snapshot) {
-      // Observe state change events such as progress, pause, and resume
-    }, function(error) {
-        // Handle unsuccessful uploads
-        console.log(error);
-      }, function(){
-         // Do something once upload is complete
-         console.log('success');
-         
-      });
-    }
-  </script>
 
 <!-- jQuery (Bootstrap JS plugins depend on it) -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

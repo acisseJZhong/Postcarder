@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Postcarder</title>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+  </head>
+
+<body>
+
+<h1 style="font-size:80px" align="center"> Your Words.. </h1>
+
+<div style="letter-spacing:12px;font-size:30px;" align = "center"> Share your moods and experiences.. </div>
+
+<div id="filesubmit">
+         <input type="file" class="file-select" accept="image/*"/>
+         <button class="file-submit">SUBMIT</button>
+</div>
+
+<br> </br>
+
+<div class="col-lg-6 col-md-6 col-sm-6" id="second">
+  <center><img src="Cover.jpg" id="Postcard" width="700" height="500">
+
+</div>
+
+<!-- Load FilePond library -->
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAgEI3fNju27RQEnNNbMaVcalcLJqHHwPc",
+    authDomain: "postcarder-b6912.firebaseapp.com",
+    databaseURL: "https://postcarder-b6912.firebaseio.com",
+    projectId: "postcarder-b6912",
+    storageBucket: "postcarder-b6912.appspot.com",
+    messagingSenderId: "535648636013"
+  };
+  firebase.initializeApp(config);
+
+  const storageService = firebase.storage();
+  const storageRef = storageService.ref();
+
+  document.querySelector('.file-select').addEventListener('change', handleFileUploadChange);
+  document.querySelector('.file-submit').addEventListener('click', handleFileUploadSubmit);
+
+  let selectedFile;
+  function handleFileUploadChange(e) {
+    selectedFile = e.target.files[0];
+  }
+
+  function handleFileUploadSubmit(e) {
+    const uploadTask = storageRef.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
+    uploadTask.on('state_changed', function(snapshot) {
+    // Observe state change events such as progress, pause, and resume
+  }, function(error) {
+      // Handle unsuccessful uploads
+      console.log(error);
+    }, function(){
+       // Do something once upload is complete
+       console.log('success');
+       uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
+         console.log('File Available at', downloadURL);
+      document.getElementById("Postcard").src=downloadURL;
+       });
+    });
+  }
+</script>
+
+
+<!-- jQuery (Bootstrap JS plugins depend on it) -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</body>
+</html>
