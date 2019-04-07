@@ -15,16 +15,24 @@
 
 <div style="letter-spacing:12px;font-size:30px;" align = "center"> Share your moods and experiences.. </div>
 
-<div id="filesubmit">
+<center><div id="filesubmit">
          <input type="file" class="file-select" accept="image/*"/>
-         <button class="file-submit">SUBMIT</button>
+         <button class="file-submit">Submit your pic</button>
 </div>
 
 <br> </br>
 
 <div class="col-lg-6 col-md-6 col-sm-6" id="second">
-  <center><img src="Cover.jpg" id="Postcard" width="700" height="500">
+  <center><img src="Cover.jpg" id="Postcard" width="600" height="500">
+</div>
 
+<div class="col-lg-6 col-md-6 col-sm-6" id="second">
+    <center><form>
+      <textarea name="myTextBox" id = "myTextBox" cols="65" rows="25" style="border:3px solid #F7730E;">
+      </textarea>
+      <br />
+    </form>
+    <button id = "submitWords" onclick="submitTextClick();">Submit your words</button>
 </div>
 
 <!-- Load FilePond library -->
@@ -68,7 +76,46 @@
        });
     });
   }
+
+  function handleTextUploadSubmit(e) {
+    const uploadTask = storageRef.child(`images/${selectedFile.name}`).put(selectedFile); //create a child directory called images, and place the file inside this directory
+    uploadTask.on('state_changed', function(snapshot) {
+    // Observe state change events such as progress, pause, and resume
+  }, function(error) {
+      // Handle unsuccessful uploads
+      console.log(error);
+    }, function(){
+       // Do something once upload is complete
+       console.log('success');
+       uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
+         console.log('File Available at', downloadURL);
+      document.getElementById("Postcard").src=downloadURL;
+       });
+    });
+  }
+
+
+  //get the text
+    function submitTextClick(){
+      var myTextBox = document.getElementById('myTextBox').value;
+      var d = new Date();
+      const uploadTask = storageRef.child(`texts/1`).putString(myTextBox);
+      uploadTask.on('state_changed',function(snapshot){
+        // Observe state change events such as progress, pause, and resume
+      }, function(error) {
+          // Handle unsuccessful uploads
+          console.log(error);
+        }, function(){
+           // Do something once upload is complete
+        console.log('Uploaded a raw String!');
+        uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL){
+          console.log('Text Available at', downloadURL);
+      });
+    });
+  }
+
 </script>
+
 
 
 <!-- jQuery (Bootstrap JS plugins depend on it) -->
